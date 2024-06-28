@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://btjmtd1rtl1ry"]
+
+[ext_resource type="Script" path="res://gameManager.gd" id="1_eiclu"]
+[ext_resource type="PackedScene" uid="uid://bywsshc83q7s3" path="res://card.tscn" id="1_yn3mk"]
+[ext_resource type="PackedScene" uid="uid://8nxihaxvlj2d" path="res://ball_pool.tscn" id="3_b83yv"]
+
+[node name="bingo" type="Node2D"]
+script = ExtResource("1_eiclu")
+
+[node name="BallPool" parent="." instance=ExtResource("3_b83yv")]
+visible = true
+position = Vector2(800, 0)
+max_number = 80
+
+[node name="Card" parent="." instance=ExtResource("1_yn3mk")]
+offset_left = 167.0
+offset_top = 186.0
+offset_right = 1338.0
+offset_bottom = 747.0

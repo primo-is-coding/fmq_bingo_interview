@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bywsshc83q7s3"]
+
+[ext_resource type="Script" path="res://Scripts/Card.gd" id="1_nyma0"]
+[ext_resource type="AudioStream" uid="uid://cdleibgiv0s4d" path="res://Audio/hit.mp3" id="2_v1fiu"]
+[ext_resource type="AudioStream" uid="uid://ch6q4bpngk1m7" path="res://Audio/miss.mp3" id="3_77wvx"]
+[ext_resource type="AudioStream" uid="uid://cffqdx3m2q1bg" path="res://Audio/BINGO.mp3" id="4_qn0jp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_882n3"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="Card" type="Panel"]
+offset_left = 244.0
+offset_top = 239.0
+offset_right = 869.0
+offset_bottom = 614.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_882n3")
+script = ExtResource("1_nyma0")
+
+[node name="Columns" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+theme_override_constants/separation = 15
+
+[node name="Rows" type="VBoxContainer" parent="Columns"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v1fiu")
+
+[node name="MissSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_77wvx")
+
+[node name="BingoSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qn0jp")

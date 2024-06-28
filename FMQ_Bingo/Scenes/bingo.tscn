@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://btjmtd1rtl1ry"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_30vjo"]
+[ext_resource type="PackedScene" uid="uid://bywsshc83q7s3" path="res://Scenes/card.tscn" id="2_6025d"]
+[ext_resource type="PackedScene" uid="uid://8nxihaxvlj2d" path="res://Scenes/ball_pool.tscn" id="3_65wmn"]
+
+[sub_resource type="Curve2D" id="Curve2D_5cqoc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1500, -200, 0, 0, 0, 0, 1500, 100, 0, 0, 0, 0, 720.8, 98.094, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 100, 200, 0, 0, 0, 0, 1500, 200, 0, 0, 0, 0, 1500, 300, 0, 0, 0, 0, 100, 300)
+}
+point_count = 8
+
+[node name="bingo" type="ReferenceRect" node_paths=PackedStringArray("ball_pool", "cards")]
+offset_right = 1600.0
+offset_bottom = 900.0
+script = ExtResource("1_30vjo")
+ball_pool = NodePath("BallPool")
+time_between_balls = 0.5
+cards = [NodePath("Card")]
+
+[node name="Card" parent="." instance=ExtResource("2_6025d")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -497.0
+offset_right = 300.0
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BallPool" parent="." instance=ExtResource("3_65wmn")]
+visible = true
+position = Vector2(4000, 4000)
+
+[node name="ExtractionPath" type="Path2D" parent="BallPool"]
+position = Vector2(-4000, -4000)
+curve = SubResource("Curve2D_5cqoc")
+
+[node name="ExtractionTimer" type="Timer" parent="BallPool"]
+wait_time = 0.05
+one_shot = true
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -321.0
+offset_right = -99.0
+offset_bottom = -210.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 75
+text = "BINGO"
+
+[connection signal="begin_extraction" from="." to="BallPool" method="_on_bingo_begin_extraction"]
+[connection signal="pause_resume_extraction" from="." to="BallPool" method="_on_bingo_pause_resume_extraction"]
+[connection signal="reset_game" from="." to="Card" method="_on_bingo_reset_game"]
+[connection signal="reset_game" from="." to="BallPool" method="_on_bingo_reset_game"]
+[connection signal="last_ball_extracted" from="Card" to="." method="_on_card_last_ball_extracted"]
+[connection signal="timeout" from="BallPool/ExtractionTimer" to="BallPool" method="_on_extraction_timer_timeout"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

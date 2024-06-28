@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://da5anmb2lwxov"]
+
+[ext_resource type="Script" path="res://Scripts/Ball.gd" id="1_humns"]
+[ext_resource type="Texture2D" uid="uid://bbn0f27ydt0f1" path="res://Art/ball.png" id="2_cdei4"]
+
+[node name="Ball" type="PathFollow2D"]
+scale = Vector2(0.2, 0.2)
+rotates = false
+loop = false
+script = ExtResource("1_humns")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cdei4")
+centered = false
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_right = 512.0
+offset_bottom = 512.0
+theme_override_colors/font_color = Color(0.226563, 0.226563, 0.226563, 1)
+theme_override_font_sizes/font_size = 120
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
